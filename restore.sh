@@ -100,11 +100,11 @@ backend host-${ID}
   sed -i "s/.*atlassian.*/cd \/opt\/atlassian\/jira\/sas\/bin\//" /etc/init.d/jira
   sed -i "s/_${INSTANCE_NAME}//" /opt/atlassian/jira/${INSTANCE_NAME}/bin/user.sh
 
-  PGPASSWORD="${DB_ROOT_PWD}" psql -q -Upostgres -h"${DB_HOST}" -c "CREATE USER ${HOST_ID} WITH CREATEDB PASSWORD '${DB_PASS_NEW}'" 
-  PGPASSWORD="${DB_ROOT_PWD}" psql -q -U"${HOST_ID}" -h"${DB_HOST}" -dtemplate1 -c "CREATE DATABASE ${HOST_ID} WITH ENCODING 'UNICODE' LC_COLLATE 'C' LC_CTYPE 'ru_RU.UTF-8' TEMPLATE template0" 
-  PGPASSWORD="${DB_ROOT_PWD}"  psql -q -U"${HOST_ID}" -h"${DB_HOST}" -c "ALTER DATABASE ${HOST_ID} OWNER TO ${HOST_ID}"
-  PGPASSWORD="${DB_ROOT_PWD}"  psql -q -U"${HOST_ID}" -h"${DB_HOST}" -c "GRANT ALL PRIVILEGES ON DATABASE ${HOST_ID} TO ${HOST_ID}"
-  PGPASSWORD="${DB_ROOT_PWD}"  psql -q -U"${HOST_ID}" -h"${DB_HOST}" -d "${DB_HOST}" < ${DB_DUMP_FILE}
+  echo PGPASSWORD="${DB_ROOT_PWD}" psql -q -Upostgres -h"${DB_HOST}" -c "CREATE USER ${HOST_ID} WITH CREATEDB PASSWORD '${DB_PASS_NEW}'" 
+  echo PGPASSWORD="${DB_ROOT_PWD}" psql -q -U"${HOST_ID}" -h"${DB_HOST}" -dtemplate1 -c "CREATE DATABASE ${HOST_ID} WITH ENCODING 'UNICODE' LC_COLLATE 'C' LC_CTYPE 'ru_RU.UTF-8' TEMPLATE template0" 
+  echo PGPASSWORD="${DB_ROOT_PWD}"  psql -q -U"${HOST_ID}" -h"${DB_HOST}" -c "ALTER DATABASE ${HOST_ID} OWNER TO ${HOST_ID}"
+  echo PGPASSWORD="${DB_ROOT_PWD}"  psql -q -U"${HOST_ID}" -h"${DB_HOST}" -c "GRANT ALL PRIVILEGES ON DATABASE ${HOST_ID} TO ${HOST_ID}"
+  echo PGPASSWORD="${DB_ROOT_PWD}"  psql -q -U"${HOST_ID}" -h"${DB_HOST}" -d "${DB_HOST}" < ${DB_DUMP_FILE}
 
   DB_CONNECT="<url>jdbc:postgresql://postgres${LXC_NODE}.tl${LXC_NODE}.local:5432/${HOST_ID}</url>"
   DB_CONNECT_USER="<username>${HOST_ID}</username>"
@@ -163,11 +163,11 @@ backend host-${ID}-synchrony
   sed -i "s/.*atlassian.*/cd \/opt\/atlassian\/confluence\/sas\/bin\//" /etc/init.d/confluence
   sed -i "s/_${INSTANCE_NAME}//" /opt/atlassian/confluence/${INSTANCE_NAME}/bin/user.sh
 
-  PGPASSWORD="${DB_ROOT_PWD}"  psql -q -Upostgres -h"${DB_HOST}" -c "CREATE USER ${HOST_ID} WITH CREATEDB PASSWORD '${DB_PASS_NEW}'" 
-  PGPASSWORD="${DB_ROOT_PWD}"  psql -q -U"${HOST_ID}" -h"${DB_HOST}" -dtemplate1 -c "CREATE DATABASE ${HOST_ID} WITH ENCODING 'UNICODE' LC_COLLATE 'ru_RU.UTF-8' LC_CTYPE 'ru_RU.UTF-8' TEMPLATE template0" 
-  PGPASSWORD="${DB_ROOT_PWD}"  psql -q -U"${HOST_ID}" -h"${DB_HOST}" -c "ALTER DATABASE ${HOST_ID} OWNER TO ${HOST_ID}"
-  PGPASSWORD="${DB_ROOT_PWD}"  psql -q -U"${HOST_ID}" -h"${DB_HOST}" -c "GRANT ALL PRIVILEGES ON DATABASE ${HOST_ID} TO ${HOST_ID}"
-  PGPASSWORD="${DB_ROOT_PWD}"  psql -q -U"${HOST_ID}" -h"${DB_HOST}" -d "${DB_HOST}" < ${DB_DUMP_FILE}
+  echo PGPASSWORD="${DB_ROOT_PWD}"  psql -q -Upostgres -h"${DB_HOST}" -c "CREATE USER ${HOST_ID} WITH CREATEDB PASSWORD '${DB_PASS_NEW}'" 
+  echo PGPASSWORD="${DB_ROOT_PWD}"  psql -q -U"${HOST_ID}" -h"${DB_HOST}" -dtemplate1 -c "CREATE DATABASE ${HOST_ID} WITH ENCODING 'UNICODE' LC_COLLATE 'ru_RU.UTF-8' LC_CTYPE 'ru_RU.UTF-8' TEMPLATE template0" 
+  echo PGPASSWORD="${DB_ROOT_PWD}"  psql -q -U"${HOST_ID}" -h"${DB_HOST}" -c "ALTER DATABASE ${HOST_ID} OWNER TO ${HOST_ID}"
+  echo PGPASSWORD="${DB_ROOT_PWD}"  psql -q -U"${HOST_ID}" -h"${DB_HOST}" -c "GRANT ALL PRIVILEGES ON DATABASE ${HOST_ID} TO ${HOST_ID}"
+  echo PGPASSWORD="${DB_ROOT_PWD}"  psql -q -U"${HOST_ID}" -h"${DB_HOST}" -d "${DB_HOST}" < ${DB_DUMP_FILE}
 
 DB_CONNECT="<url>jdbc:postgresql://postgres${LXC_NODE}.tl${LXC_NODE}.local:5432/${HOST_ID}</url>"
 DB_CONNECT_USER="<property name="hibernate.connection.username">${HOST_ID}</property>"
